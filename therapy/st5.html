@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="description" content="療法士のための教材集">
+    <meta name="keywords" content="リハビリ,言語聴覚士,作業療法士,言語療法">
+    <title>無作為矢印表 - 療法教材</title>
+    <style>
+     body{
+       width: 1024px;
+       margin: auto;
+     }
+     #wrap{ 
+       width: 100%;
+       margin: 0 auto;
+       text-align:left;
+     }
+     td, th {
+       border: solid;
+       font-size: 4em;
+       font-weight: bold;
+       width: 100px;
+       height: 100px;
+       text-align: center;
+     }
+     table {
+       border-collapse: collapse;
+       table-layout: fixed;
+     }
+    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7958083579851040"
+            crossorigin="anonymous"></script>
+  </head>
+  <body>
+<p>
+  <select id="row" value="4" onchange="fill()">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4" selected>4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+  </select>
+  ×
+  <select id="col" value="6" onchange="fill()">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6" selected>6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+  </select>
+<button onClick="fill();">再配置</button>
+</p>
+<table id="main">
+</table>
+    <hr />
+    <div style="text-align: right; font-style: italic;">
+      Copyright (c) <a href="https://www.kandj.org">K&J Software Design</a>, Corp. All rights reserved.
+    </div>
+  </body>
+<script>
+ const syms = ['👆','👇','👉','👈'];
+ let chars = [];
+ function make_table() {
+   const rown = document.getElementById('row').value;
+   const coln = document.getElementById('col').value;
+   const main = document.getElementById('main');
+
+   while(main.firstChild ) {
+     main.removeChild(main.firstChild);
+   }
+
+   let idx = 0;
+   chars = [];
+   random_sort(syms);
+   for (let i = 0; i < rown; i++) {
+     const tr = document.createElement('tr');
+     for (let j = 0; j < coln; j++) {
+       const td = document.createElement('td');
+       tr.appendChild(td);
+       chars.push(syms[idx]);
+       idx = (idx < syms.length - 1) ? idx + 1: 0;
+     }
+     main.appendChild(tr);
+   }
+ }
+ 
+ function random_sort(ary) {
+   let a = ary.length;
+   while (a) {
+     const j = Math.floor( Math.random() * a);
+     const t = ary[--a];
+     ary[a] = ary[j];
+     ary[j] = t;
+   }
+ }
+ 
+ function fill() {
+   make_table();
+   random_sort(chars);
+
+   document.querySelectorAll('td').forEach((el,i) => {
+     el.innerHTML = chars[i];
+   });
+ }
+ (function() {
+   fill();
+  })();
+</script>
+</html>

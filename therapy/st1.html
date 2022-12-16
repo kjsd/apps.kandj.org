@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="description" content="療法士のための教材集">
+    <meta name="keywords" content="リハビリ,言語聴覚士,作業療法士,言語療法">
+    <title>無作為数字表 - 療法教材</title>
+    <style>
+     body{
+       width: 1024px;
+       margin: auto;
+     }
+     #wrap{ 
+       width: 100%;
+       margin: 0 auto;
+       text-align:left;
+     }
+     td, th {
+       border: solid;
+       font-size: 2em;
+       width: 100px;
+       height: 100px;
+       text-align: center;
+     }
+     table {
+       border-collapse: collapse;
+       table-layout: fixed;
+     }
+    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7958083579851040"
+            crossorigin="anonymous"></script>
+  </head>
+<body>
+<button onClick="fill();">再配置</button>
+<table>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>  
+    <hr />
+    <div style="text-align: right; font-style: italic;">
+      Copyright (c) <a href="https://www.kandj.org">K&J Software Design</a>, Corp. All rights reserved.
+    </div>
+</body>
+<script>
+ const numbers = [];
+ function fill() {
+   let a = numbers.length;
+   while (a) {
+     const j = Math.floor( Math.random() * a);
+     const t = numbers[--a];
+     numbers[a] = numbers[j];
+     numbers[j] = t;
+   }
+ 
+   document.querySelectorAll('td').forEach((el,i) => {
+     el.innerHTML = numbers[i];
+   });
+ }
+ (function() {
+   for (let i = 1; i  <= 100; i++) {
+     numbers.push(i);
+   }
+   fill();
+  })();
+</script>
+</html>

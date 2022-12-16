@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="description" content="療法士のための教材集">
+    <meta name="keywords" content="リハビリ,言語聴覚士,作業療法士,言語療法">
+    <title>計算問題生成器 - 療法教材</title>
+    <style>
+     body{
+       max-width: 1024px;
+       margin: auto;
+     }
+     #wrap{ 
+       width: 100%;
+       margin: 0 auto;
+       text-align:left;
+     }
+     .formula {
+       font-size: 3em;
+       padding-left: 5px;
+       border-left: 1rem solid;
+     }
+    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7958083579851040"
+            crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div id="wrap">
+      <p>
+        問題数：
+        <select id="num" value="10" onchange="make_formula()">
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option> 
+          <option value="40">40</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+        <br />
+        桁数：
+        <select id="digits" value="1" onchange="make_formula()">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option> 
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        <br />
+        項数：
+        <select id="args" value="2" onchange="make_formula()">
+          <option value="2">2</option>
+          <option value="3">3</option> 
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </p>
+      <p>
+        演算子：
+        <input type="checkbox" id="use_plus" checked  onchange="make_formula()" />
+        <label for="use_plus">＋</label>
+        <input type="checkbox" id="use_minus"  onchange="make_formula()" />
+        <label for="use_minus">−</label>
+        <input type="checkbox" id="use_square"  onchange="make_formula()" />
+        <label for="use_square">×</label>
+      </p>
+      <p>
+        <input type="checkbox" id="hide_answer" onchange="toggle_answer()"/>
+        <label for="hide_answer">回答を隠す</label>    
+      </p>
+      <div style="display: flex; justify-content: space-between;">
+        <div id="formula-0" class="formula">
+        </div>
+        <div id="formula-1" class="formula">
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div style="text-align: right; font-style: italic;">
+      Copyright (c) <a href="https://www.kandj.org">K&J Software Design</a>, Corp.All rights reserved.
+    </div>
+  </body>
+<script>
+function toggle_answer() {
+  const el = document.getElementById("hide_answer");
+  const v = el.checked ? "hidden": "visible"; 
+  document.querySelectorAll(".a").forEach(el => {
+       el.style.visibility = v;
+  });
+}
+ function make_formula() {
+  const num = document.getElementById("num").value;
+   const digits = document.getElementById("digits").value;
+   const argsnum = document.getElementById("args").value;
+   const use_plus = document.getElementById("use_plus").checked;
+   const use_minus = document.getElementById("use_minus").checked;
+   const use_square = document.getElementById("use_square").checked;
+
+
+   const args = [];
+   const ops = [];
+   if (use_plus) {
+       ops.push("+");
+   }
+   if (use_minus) {
+       ops.push("-");
+   }
+   if (use_square) {
+      ops.push("*");
+   }
+
+   const p0 = document.getElementById("formula-0");
+   const p1 = document.getElementById("formula-1");
+   while(p0.firstChild ) {
+     p0.removeChild(p0.firstChild);
+   }
+   while(p1.firstChild ) {
+     p1.removeChild(p1.firstChild);
+   }
+
+   for (let n = 0; n < num; n++) {
+     const args = [];
+     for (let i = 0; i < argsnum; i++) {
+       const min = digits == 1 ? 0: Math.pow(10, digits - 1);
+       const max = Math.pow(10, digits);
+       const v = Math.floor(Math.random() * (max - min)) + min;
+       args.push(v);
+     }
+     const fel = document.createElement("div");
+     let fstr = "";
+     let  f = "";
+     args.forEach((v,idx) => {
+       fstr = fstr + `${v}`;
+       f = f + `${v}`;
+       if (idx < (argsnum - 1)) {
+         random_sort(ops);
+         f += `${ops[0]}`;
+         switch(ops[0]) {
+           case "+":
+             fstr += ' ＋ ';
+             break;
+           case "-":
+             fstr += " － ";
+             break;
+           case "*":
+             fstr += " × ";
+             break;
+         } 
+       }
+     });
+     fstr += ' ＝ ';
+     fel.innerHTML = fstr;
+     const ael = document.createElement("span");
+     ael.classList.add("a");
+     ael.innerHTML = eval(f);
+     fel.appendChild(ael);
+
+     if (n < num / 2) {
+       p0.appendChild(fel);
+     } else {
+       p1.appendChild(fel);
+     }
+   }
+ }
+
+function random_sort(ary) {
+   let a = ary.length;
+   while (a) {
+     const j = Math.floor( Math.random() * a);
+     const t = ary[--a];
+     ary[a] = ary[j];
+     ary[j] = t;
+   }
+ }
+ (function() {
+   make_formula();
+})();
+</script>
+</html>

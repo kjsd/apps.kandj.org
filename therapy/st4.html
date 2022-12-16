@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="description" content="療法士のための教材集">
+    <meta name="keywords" content="リハビリ,言語聴覚士,作業療法士,言語療法">
+    <title>ナンプレ生成器 - 療法教材</title>
+    <style>
+     body{
+       width: 1024px;
+       margin: auto;
+     }
+     #wrap{ 
+       width: 100%;
+       margin: 0 auto;
+       text-align:left;
+     }
+     td, th {
+       font-size: 2em;
+       text-align: center;
+     }
+     table {
+       border-collapse: collapse;
+       table-layout: fixed;
+     }
+    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7958083579851040"
+            crossorigin="anonymous"></script>
+  </head>
+  <body>
+<p style="display:flex;">
+  <input type="button" value="再生成" onclick="nanpure_start();">
+  <input type="button" value="回答表示/非表示" onclick="toggle_answer()">
+</p>
+<div style="display:flex;">
+<table border="1" bordercolor="#000000" cellpadding="0" cellspacing="0">
+<tr>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+</tr><tr>
+<td width="3" bgcolor="#000000"></td>
+<td id="11" width="50" height="50" onclick="nanpure_put(1,1);">　</td>
+<td id="21" width="50" height="50" onclick="nanpure_put(2,1);">　</td>
+<td id="31" width="50" height="50" onclick="nanpure_put(3,1);">　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="41" width="50" height="50" onclick="nanpure_put(4,1);">　</td>
+<td id="51" width="50" height="50" onclick="nanpure_put(5,1);">　</td>
+<td id="61" width="50" height="50" onclick="nanpure_put(6,1);">　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="71" width="50" height="50" onclick="nanpure_put(7,1);">　</td>
+<td id="81" width="50" height="50" onclick="nanpure_put(8,1);">　</td>
+<td id="91" width="50" height="50" onclick="nanpure_put(9,1);">　</td>
+<td width="3" bgcolor="#000000"></td>
+</tr><tr>
+<td width="3" bgcolor="#000000"></td>
+<td id="12" width="50" height="50" onclick="nanpure_put(1,2);">　</td>
+<td id="22" width="50" height="50" onclick="nanpure_put(2,2);">　</td>
+<td id="32" width="50" height="50" onclick="nanpure_put(3,2);">　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="42" width="50" height="50" onclick="nanpure_put(4,2);">　</td>
+<td id="52" width="50" height="50" onclick="nanpure_put(5,2);">　</td>
+<td id="62" width="50" height="50" onclick="nanpure_put(6,2);">　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="72" width="50" height="50" onclick="nanpure_put(7,2);">　</td>
+<td id="82" width="50" height="50" onclick="nanpure_put(8,2);">　</td>
+<td id="92" width="50" height="50" onclick="nanpure_put(9,2);">　</td>
+<td width="3" bgcolor="#000000"></td>
+</tr><tr>
+<td width="3" bgcolor="#000000"></td>
+<td id="13" width="50" height="50" onclick="nanpure_put(1,3);">　</td>
+<td id="23" width="50" height="50" onclick="nanpure_put(2,3);">　</td>
+<td id="33" width="50" height="50" onclick="nanpure_put(3,3);">　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="43" width="50" height="50" onclick="nanpure_put(4,3);">　</td>
+<td id="53" width="50" height="50" onclick="nanpure_put(5,3);">　</td>
+<td id="63" width="50" height="50" onclick="nanpure_put(6,3);">　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="73" width="50" height="50" onclick="nanpure_put(7,3);">　</td>
+<td id="83" width="50" height="50" onclick="nanpure_put(8,3);">　</td>
+<td id="93" width="50" height="50" onclick="nanpure_put(9,3);">　</td>
+<td width="3" bgcolor="#000000"></td>
+</tr><tr>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+</tr><tr>
+<td width="3" bgcolor="#000000"></td>
+<td id="14" width="50" height="50" onclick="nanpure_put(1,4);">　</td>
+<td id="24" width="50" height="50" onclick="nanpure_put(2,4);">　</td>
+<td id="34" width="50" height="50" onclick="nanpure_put(3,4);">　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="44" width="50" height="50" onclick="nanpure_put(4,4);">　</td>
+<td id="54" width="50" height="50" onclick="nanpure_put(5,4);">　</td>
+<td id="64" width="50" height="50" onclick="nanpure_put(6,4);">　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="74" width="50" height="50" onclick="nanpure_put(7,4);">　</td>
+<td id="84" width="50" height="50" onclick="nanpure_put(8,4);">　</td>
+<td id="94" width="50" height="50" onclick="nanpure_put(9,4);">　</td>
+<td width="3" bgcolor="#000000"></td>
+</tr><tr>
+<td width="3" bgcolor="#000000"></td>
+<td id="15" width="50" height="50" onclick="nanpure_put(1,5);">　</td>
+<td id="25" width="50" height="50" onclick="nanpure_put(2,5);">　</td>
+<td id="35" width="50" height="50" onclick="nanpure_put(3,5);">　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="45" width="50" height="50" onclick="nanpure_put(4,5);">　</td>
+<td id="55" width="50" height="50" onclick="nanpure_put(5,5);">　</td>
+<td id="65" width="50" height="50" onclick="nanpure_put(6,5);">　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="75" width="50" height="50" onclick="nanpure_put(7,5);">　</td>
+<td id="85" width="50" height="50" onclick="nanpure_put(8,5);">　</td>
+<td id="95" width="50" height="50" onclick="nanpure_put(9,5);">　</td>
+<td width="3" bgcolor="#000000"></td>
+</tr><tr>
+<td width="3" bgcolor="#000000"></td>
+<td id="16" width="50" height="50" onclick="nanpure_put(1,6);">　</td>
+<td id="26" width="50" height="50" onclick="nanpure_put(2,6);">　</td>
+<td id="36" width="50" height="50" onclick="nanpure_put(3,6);">　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="46" width="50" height="50" onclick="nanpure_put(4,6);">　</td>
+<td id="56" width="50" height="50" onclick="nanpure_put(5,6);">　</td>
+<td id="66" width="50" height="50" onclick="nanpure_put(6,6);">　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="76" width="50" height="50" onclick="nanpure_put(7,6);">　</td>
+<td id="86" width="50" height="50" onclick="nanpure_put(8,6);">　</td>
+<td id="96" width="50" height="50" onclick="nanpure_put(9,6);">　</td>
+<td width="3" bgcolor="#000000"></td>
+</tr><tr>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+</tr><tr>
+<td width="3" bgcolor="#000000"></td>
+<td id="17" width="50" height="50" onclick="nanpure_put(1,7);">　</td>
+<td id="27" width="50" height="50" onclick="nanpure_put(2,7);">　</td>
+<td id="37" width="50" height="50" onclick="nanpure_put(3,7);">　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="47" width="50" height="50" onclick="nanpure_put(4,7);">　</td>
+<td id="57" width="50" height="50" onclick="nanpure_put(5,7);">　</td>
+<td id="67" width="50" height="50" onclick="nanpure_put(6,7);">　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="77" width="50" height="50" onclick="nanpure_put(7,7);">　</td>
+<td id="87" width="50" height="50" onclick="nanpure_put(8,7);">　</td>
+<td id="97" width="50" height="50" onclick="nanpure_put(9,7);">　</td>
+<td width="3" bgcolor="#000000"></td>
+</tr><tr>
+<td width="3" bgcolor="#000000"></td>
+<td id="18" width="50" height="50" onclick="nanpure_put(1,8);">　</td>
+<td id="28" width="50" height="50" onclick="nanpure_put(2,8);">　</td>
+<td id="38" width="50" height="50" onclick="nanpure_put(3,8);">　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="48" width="50" height="50" onclick="nanpure_put(4,8);">　</td>
+<td id="58" width="50" height="50" onclick="nanpure_put(5,8);">　</td>
+<td id="68" width="50" height="50" onclick="nanpure_put(6,8);">　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="78" width="50" height="50" onclick="nanpure_put(7,8);">　</td>
+<td id="88" width="50" height="50" onclick="nanpure_put(8,8);">　</td>
+<td id="98" width="50" height="50" onclick="nanpure_put(9,8);">　</td>
+<td width="3" bgcolor="#000000"></td>
+</tr><tr>
+<td width="3" bgcolor="#000000"></td>
+<td id="19" width="50" height="50" onclick="nanpure_put(1,9);">　</td>
+<td id="29" width="50" height="50" onclick="nanpure_put(2,9);">　</td>
+<td id="39" width="50" height="50" onclick="nanpure_put(3,9);">　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="49" width="50" height="50" onclick="nanpure_put(4,9);">　</td>
+<td id="59" width="50" height="50" onclick="nanpure_put(5,9);">　</td>
+<td id="69" width="50" height="50" onclick="nanpure_put(6,9);">　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="79" width="50" height="50" onclick="nanpure_put(7,9);">　</td>
+<td id="89" width="50" height="50" onclick="nanpure_put(8,9);">　</td>
+<td id="99" width="50" height="50" onclick="nanpure_put(9,9);">　</td>
+<td width="3" bgcolor="#000000"></td>
+</tr><tr>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+</tr>
+</table>
+<table id="answer" border="1" bordercolor="#000000" style="visibility: hidden;">
+<tr>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+</tr><tr>
+<td width="3" bgcolor="#000000"></td>
+<td id="a11" width="50" height="50" >　</td>
+<td id="a21" width="50" height="50" >　</td>
+<td id="a31" width="50" height="50" >　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="a41" width="50" height="50" >　</td>
+<td id="a51" width="50" height="50" >　</td>
+<td id="a61" width="50" height="50" >　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="a71" width="50" height="50" >　</td>
+<td id="a81" width="50" height="50" >　</td>
+<td id="a91" width="50" height="50" >　</td>
+<td width="3" bgcolor="#000000"></td>
+</tr><tr>
+<td width="3" bgcolor="#000000"></td>
+<td id="a12" width="50" height="50" >　</td>
+<td id="a22" width="50" height="50" >　</td>
+<td id="a32" width="50" height="50" >　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="a42" width="50" height="50" >　</td>
+<td id="a52" width="50" height="50" >　</td>
+<td id="a62" width="50" height="50" >　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="a72" width="50" height="50" >　</td>
+<td id="a82" width="50" height="50" >　</td>
+<td id="a92" width="50" height="50" >　</td>
+<td width="3" bgcolor="#000000"></td>
+</tr><tr>
+<td width="3" bgcolor="#000000"></td>
+<td id="a13" width="50" height="50" >　</td>
+<td id="a23" width="50" height="50" >　</td>
+<td id="a33" width="50" height="50" >　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="a43" width="50" height="50" >　</td>
+<td id="a53" width="50" height="50" >　</td>
+<td id="a63" width="50" height="50" >　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="a73" width="50" height="50" >　</td>
+<td id="a83" width="50" height="50" >　</td>
+<td id="a93" width="50" height="50" >　</td>
+<td width="3" bgcolor="#000000"></td>
+</tr><tr>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+</tr><tr>
+<td width="3" bgcolor="#000000"></td>
+<td id="a14" width="50" height="50" >　</td>
+<td id="a24" width="50" height="50" >　</td>
+<td id="a34" width="50" height="50" >　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="a44" width="50" height="50" >　</td>
+<td id="a54" width="50" height="50" >　</td>
+<td id="a64" width="50" height="50" >　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="a74" width="50" height="50" >　</td>
+<td id="a84" width="50" height="50" >　</td>
+<td id="a94" width="50" height="50" >　</td>
+<td width="3" bgcolor="#000000"></td>
+</tr><tr>
+<td width="3" bgcolor="#000000"></td>
+<td id="a15" width="50" height="50" >　</td>
+<td id="a25" width="50" height="50" >　</td>
+<td id="a35" width="50" height="50" >　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="a45" width="50" height="50" >　</td>
+<td id="a55" width="50" height="50" >　</td>
+<td id="a65" width="50" height="50" >　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="a75" width="50" height="50" >　</td>
+<td id="a85" width="50" height="50" >　</td>
+<td id="a95" width="50" height="50" >　</td>
+<td width="3" bgcolor="#000000"></td>
+</tr><tr>
+<td width="3" bgcolor="#000000"></td>
+<td id="a16" width="50" height="50" >　</td>
+<td id="a26" width="50" height="50" >　</td>
+<td id="a36" width="50" height="50" >　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="a46" width="50" height="50" >　</td>
+<td id="a56" width="50" height="50" >　</td>
+<td id="a66" width="50" height="50" >　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="a76" width="50" height="50" >　</td>
+<td id="a86" width="50" height="50" >　</td>
+<td id="a96" width="50" height="50" >　</td>
+<td width="3" bgcolor="#000000"></td>
+</tr><tr>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+</tr><tr>
+<td width="3" bgcolor="#000000"></td>
+<td id="a17" width="50" height="50" >　</td>
+<td id="a27" width="50" height="50" >　</td>
+<td id="a37" width="50" height="50" >　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="a47" width="50" height="50" >　</td>
+<td id="a57" width="50" height="50" >　</td>
+<td id="a67" width="50" height="50" >　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="a77" width="50" height="50" >　</td>
+<td id="a87" width="50" height="50" >　</td>
+<td id="a97" width="50" height="50" >　</td>
+<td width="3" bgcolor="#000000"></td>
+</tr><tr>
+<td width="3" bgcolor="#000000"></td>
+<td id="a18" width="50" height="50" >　</td>
+<td id="a28" width="50" height="50" >　</td>
+<td id="a38" width="50" height="50" >　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="a48" width="50" height="50" >　</td>
+<td id="a58" width="50" height="50" >　</td>
+<td id="a68" width="50" height="50" >　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="a78" width="50" height="50" >　</td>
+<td id="a88" width="50" height="50" >　</td>
+<td id="a98" width="50" height="50" >　</td>
+<td width="3" bgcolor="#000000"></td>
+</tr><tr>
+<td width="3" bgcolor="#000000"></td>
+<td id="a19" width="50" height="50" >　</td>
+<td id="a29" width="50" height="50" >　</td>
+<td id="a39" width="50" height="50" >　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="a49" width="50" height="50" >　</td>
+<td id="a59" width="50" height="50" >　</td>
+<td id="a69" width="50" height="50" >　</td>
+<td width="3" bgcolor="#000000"></td>
+<td id="a79" width="50" height="50" >　</td>
+<td id="a89" width="50" height="50" >　</td>
+<td id="a99" width="50" height="50" >　</td>
+<td width="3" bgcolor="#000000"></td>
+</tr><tr>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+<td height="3" bgcolor="#000000"></td>
+</tr>
+</table>
+</div>
+    <hr />
+    <div style="text-align: right; font-style: italic;">
+      Copyright (c) <a href="https://www.kandj.org">K&J Software Design</a>, Corp. All rights reserved.
+    </div>
+  </body>
+<script>
+
+ function toggle_answer() {
+   const el = document.getElementById('answer');
+   el.style.visibility = (el.style.visibility == 'hidden') ? 'visible': 'hidden';
+ }
+ 
+function get_random(max) {
+	return parseInt(Math.random()*max);
+}
+
+function solve(result,question) {
+	var possible;
+	var m,n;
+	var i,j,k,l;
+	var found;
+	var x,y;
+	possible=new Array(9);
+	for(i=0;i<9;i++) {
+		possible[i]=new Array(9);
+		for(j=0;j<9;j++)possible[i][j]=new Array(9);
+	}
+	for(m=0;m<9;m++) {
+		for(n=0;n<9;n++) {
+			/*単純な解析*/
+			for(i=0;i<9;i++) {
+				for(j=0;j<9;j++) {
+					if(question[i][j] && !(m==i && n==j)) {
+						/*特定の数字である*/
+						for(k=0;k<9;k++) {
+							if(k+1==question[i][j])possible[i][j][k]=1;
+							else possible[i][j][k]=0;
+						}
+					} else {
+						/*全ての数字の可能性がある*/
+						for(k=0;k<9;k++)possible[i][j][k]=1;
+						/*既に入っている数字を消す*/
+						for(k=0;k<9;k++) {
+							/*横にある数字を消す*/
+							if(k!=j) {
+								if(question[i][k] && !(i==m && k==n))
+									possible[i][j][question[i][k]-1]=0;
+							}
+							/*縦にある数字を消す*/
+							if(k!=i) {
+								if(question[k][j] && !(k==m && j==n))
+									possible[i][j][question[k][j]-1]=0;
+							}
+							/*同じブロックにある数字を消す*/
+							x=parseInt(j/3)*3+k%3;
+							y=parseInt(i/3)*3+parseInt(k/3);
+							if(x!=j || y!=i) {
+								if(question[y][x] && !(y==m && x==n))
+									possible[i][j][question[y][x]-1]=0;
+							}
+						}
+					}
+				}
+			}
+			/*列単位の解析*/
+			for(i=0;i<9;i++) {
+				for(j=0;j<9;j++) {
+					if(i==m && j==n)continue;
+					for(k=0;k<9;k++) {
+						if(possible[i][j][k]) {
+							/*他の行に置けないならその行確定*/
+							found=0;
+							for(l=0;l<9;l++) {
+								x=parseInt(j/3)*3+l%3;
+								y=parseInt(i/3)*3+parseInt(l/3);
+								if(y==i)continue;
+								if(y==m && x==n)continue;
+								if(possible[i][j][k])found=1;
+							}
+							if(!found) {
+								for(l=0;l<9;l++) {
+									if(parseInt(j/3)!=parseInt(l/3))possible[i][l][k]=0;
+								}
+							}
+							/*他の列に置けないならその列確定*/
+							found=0;
+							for(l=0;l<9;l++) {
+								x=parseInt(j/3)*3+l%3;
+								y=parseInt(i/3)*3+parseInt(l/3);
+								if(x==j)continue;
+								if(y==m && x==n)continue;
+								if(possible[i][j][k])found=1;
+							}
+							if(!found) {
+								for(l=0;l<9;l++) {
+									if(parseInt(i/3)!=parseInt(l/3))possible[l][j][k]=0;
+								}
+							}
+						}
+					}
+				}
+			}
+			/*そこにしか置けないなら置く*/
+			for(i=0;i<9;i++) {
+				if(possible[m][n][i]) {
+					/*横の解析*/
+					found=0;
+					for(j=0;j<9;j++) {
+						if(j==n)continue;
+						if(possible[m][j][i]) {
+							found=1;
+							break;
+						}
+					}
+					if(!found) {
+						/*横でそこにしか置けなければ置く*/
+						for(j=0;j<9;j++) {
+							if(j!=i)possible[m][n][j]=0;
+						}
+					}
+					/*縦の解析*/
+					found=0;
+					for(j=0;j<9;j++) {
+						if(j==m)continue;
+						if(possible[j][n][i]) {
+							found=1;
+							break;
+						}
+					}
+					if(!found) {
+						/*縦でそこにしか置けなければ置く*/
+						for(j=0;j<9;j++) {
+							if(j!=i)possible[m][n][j]=0;
+						}
+					}
+					/*グループの解析*/
+					found=0;
+					for(j=0;j<9;j++) {
+						x=parseInt(n/3)*3+j%3;
+						y=parseInt(m/3)*3+parseInt(j/3);
+						if(x==n && y==m)continue;
+						if(possible[y][x][i]) {
+							found=1;
+							break;
+						}
+					}
+					if(!found) {
+						/*グループでそこにしか置けなければ置く*/
+						for(j=0;j<9;j++) {
+							if(j!=i)possible[m][n][j]=0;
+						}
+					}
+				}
+			}
+			/*可能性のある数字を探す*/
+			found=0;
+			for(k=0;k<9;k++) {
+				if(possible[m][n][k]) {
+					if(found) {
+						result[m][n]=0;
+						break;
+					} else {
+						result[m][n]=k+1;
+						found=1;
+					}
+				}
+			}
+			if(!found)result[m][n]=0;
+		}
+	}
+}
+
+function make_nanpure() {
+	var zyunban=new Array(
+		new Array(0,1,2),
+		new Array(0,2,1),
+		new Array(1,0,2),
+		new Array(1,2,0),
+		new Array(2,0,1),
+		new Array(2,1,0)
+	); 
+	var suuzi=new Array(
+		new Array(1,2,3,4,5,6,7,8,9),
+		new Array(4,5,6,7,8,9,1,2,3),
+		new Array(7,8,9,1,2,3,4,5,6),
+		new Array(2,3,4,5,6,7,8,9,1),
+		new Array(5,6,7,8,9,1,2,3,4),
+		new Array(8,9,1,2,3,4,5,6,7),
+		new Array(3,4,5,6,7,8,9,1,2),
+		new Array(6,7,8,9,1,2,3,4,5),
+		new Array(9,1,2,3,4,5,6,7,8)
+	);
+	var suuzi2;
+	var i,j,k;
+	var where;
+	var delok;
+	var deloknum;
+	suuzi2=new Array(9);
+	for(i=0;i<9;i++)suuzi2[i]=new Array(9);
+	delok=new Array(81);
+	for(i=0;i<81;i++)delok[i]=new Array(2);
+	/*縦の仲間の列の順番を入れ替える*/
+	for(i=0;i<3;i++) {
+		where=get_random(6);
+		for(j=0;j<3;j++) {
+			for(k=0;k<9;k++) {
+				suuzi2[k][i+j*3]=suuzi[k][i+zyunban[where][j]*3];
+			}
+		}
+	}
+	for(i=0;i<9;i++) {
+		for(j=0;j<9;j++)suuzi[i][j]=suuzi2[i][j];
+	}
+	/*縦のブロックの列の順番を入れ替える*/
+	for(i=0;i<3;i++) {
+		where=get_random(6);
+		for(j=0;j<3;j++) {
+			for(k=0;k<9;k++) {
+				suuzi2[k][i*3+j]=suuzi[k][i*3+zyunban[where][j]];
+			}
+		}
+	}
+	for(i=0;i<9;i++) {
+		for(j=0;j<9;j++)suuzi[i][j]=suuzi2[i][j];
+	}
+	/*横のブロックの列の順番を入れ替える*/
+	for(i=0;i<3;i++) {
+		where=get_random(6);
+		for(j=0;j<3;j++) {
+			for(k=0;k<9;k++) {
+				suuzi2[i*3+j][k]=suuzi[i*3+zyunban[where][j]][k];
+			}
+		}
+	}
+	for(i=0;i<9;i++) {
+		for(j=0;j<9;j++)suuzi[i][j]=suuzi2[i][j];
+	}
+	/*まわりから特定できる数字を消していく*/
+	while(1) {
+		/*消せる数字を探す*/ 
+		solve(suuzi2,suuzi);
+		deloknum=0;
+		for(i=0;i<9;i++) {
+			for(j=0;j<9;j++) {
+			  if(suuzi2[i][j] && suuzi[i][j]) {
+                document.getElementById(`a${j+1}${i+1}`).innerHTML=suuzi[i][j];
+					delok[deloknum][0]=i;
+					delok[deloknum][1]=j;
+					deloknum++;
+				}
+			}
+		}
+		/*消せなくなったら終了*/
+		if(deloknum<=0)break;
+	  /*数字を一つ消す*/
+		where=get_random(deloknum);
+		suuzi[delok[where][0]][delok[where][1]]=0;
+	}
+	return suuzi;
+}
+
+var mozi=new Array("　","１","２","３","４","５","６","７","８","９");
+var question;
+var kaitou;
+var running=0;
+var timer_id=-1;
+var starttime;
+var put_x=0;
+var put_y=0;
+
+function nanpure_start() {
+	var i,j;
+	//if(running) {
+	//	if(!confirm("リセットしますか？"))return;
+	//}
+	kaitou=new Array(9);
+	question=make_nanpure();
+	for(i=0;i<9;i++) {
+		kaitou[i]=new Array(9);
+		for(j=0;j<9;j++) {
+			kaitou[i][j]=question[i][j];
+			document.getElementById(""+(j+1)+(i+1)).innerHTML=mozi[question[i][j]];
+			if(question[i][j])document.getElementById(""+(j+1)+(i+1)).style.color="#008000";
+			else document.getElementById(""+(j+1)+(i+1)).style.color="#000000";
+			document.getElementById(""+(j+1)+(i+1)).style.backgroundColor="#FFFFFF";
+		}
+	}
+	starttime=(new Date()).getTime();
+	//timer_id=setInterval("nanpure_disptime();",100);
+	//running=1;
+}
+
+function nanpure_disptime() {
+	var nowtime=(new Date()).getTime()-starttime;
+	var m=parseInt(nowtime/60000);
+	var s=parseInt(nowtime/1000)%60;
+	if(!running)return;
+	document.getElementById("nanpure_zikan").innerHTML=""+m+"分"+s+"秒";
+}
+
+function nanpure_unload() {
+	if(timer_id!=-1)clearInterval(timer_id);
+}
+
+function nanpure_put(x,y) {
+	if(!running)return;
+	if(put_x>0 && put_y>0) {
+		document.getElementById(""+put_x+put_y).style.backgroundColor="#FFFFFF";
+	}
+	if(question[y-1][x-1]) {
+		put_x=0;
+		put_y=0;
+	} else {
+		put_x=x;
+		put_y=y;
+		document.getElementById(""+put_x+put_y).style.backgroundColor="#FF0000";
+	}
+}
+
+function keyCode(e){
+	if(document.all)
+		return  e.keyCode;
+	else if(document.getElementById)
+		return (e.keyCode)? e.keyCode: e.charCode;
+	else if(document.layers)
+		return  e.which;
+	return 0;
+}
+
+function nanpure_key(e) {
+	var kc=keyCode(e);
+	if(!running)return;
+	if(put_x>0 && put_y>0) {
+		if(kc>=48 && kc<58) {
+			kaitou[put_y-1][put_x-1]=kc-48;
+			document.getElementById(""+put_x+put_y).innerHTML=mozi[kaitou[put_y-1][put_x-1]];
+		} else if(kc>=96 && kc<106) {
+			kaitou[put_y-1][put_x-1]=kc-96;
+			document.getElementById(""+put_x+put_y).innerHTML=mozi[kaitou[put_y-1][put_x-1]];
+		}
+		document.getElementById(""+put_x+put_y).style.backgroundColor="#FFFFFF";
+		put_x=0;
+		put_y=0;
+		//nanpure_exit_check();
+	}
+}
+
+function nanpure_exit_check() {
+	var resulttime;
+	var resulttext;
+	var m,s;
+	if(nanpure_hantei()) {
+		running=0;
+		clearInterval(timer_id);
+		timer_id=-1;
+		resulttime=(new Date()).getTime()-starttime;
+		m=parseInt(resulttime/60000);
+		s=parseInt(resulttime/1000)%60;
+		resulttext=""+m+"分"+s+"秒";
+		document.getElementById("nanpure_zikan").innerHTML=resulttext;
+		alert(resulttext+"で完成です！おめでとう！");
+	}
+}
+
+function nanpure_hantei() {
+	var i,j;
+	var x,y;
+	var found;
+	found=new Array(9);
+	//縦の判定
+	for(i=0;i<9;i++) {
+		for(j=0;j<9;j++)found[j]=0;
+		for(j=0;j<9;j++) {
+			if(kaitou[j][i]>0)found[kaitou[j][i]-1]=1;
+		}
+		for(j=0;j<9;j++) {
+			if(!found[j])return 0;
+		}
+	}
+	//横の判定
+	for(i=0;i<9;i++) {
+		for(j=0;j<9;j++)found[j]=0;
+		for(j=0;j<9;j++) {
+			if(kaitou[i][j]>0)found[kaitou[j][i]-1]=1;
+		}
+		for(j=0;j<9;j++) {
+			if(!found[j])return 0;
+		}
+	}
+	//グループの判定
+	for(i=0;i<9;i++) {
+		for(j=0;j<9;j++)found[j]=0;
+		for(j=0;j<9;j++) {
+			x=(i%3)*3+j%3;
+			y=parseInt(i/3)*3+parseInt(j/3);
+			if(kaitou[y][x]>0)found[kaitou[y][x]-1]=1;
+		}
+		for(j=0;j<9;j++) {
+			if(!found[j])return 0;
+		}
+	}
+	return 1;
+ }
+ 
+ (function(){
+   nanpure_start();
+ })();
+ 
+</script>
+</html>

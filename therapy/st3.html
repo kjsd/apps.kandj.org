@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="description" content="療法士のための教材集">
+    <meta name="keywords" content="リハビリ,言語聴覚士,作業療法士,言語療法">
+    <title>計算問題生成器 - 療法教材</title>
+    <style>
+    body{
+       width: 1024px;
+       margin: auto;
+     }
+     #wrap{ 
+       width: 100%;
+       margin: 0 auto;
+       text-align:left;
+      }
+    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7958083579851040"
+            crossorigin="anonymous"></script>
+  </head>
+  <body>
+<p>幅:<br /><input id="rgx" style="width: 100%;" max="60" min="5" type="range" value="15" /></p>
+<p>高さ:<br /><input id="rgy" style="width: 100%;" max="60" min="5" type="range" value="10" /></p>
+<p><input id="btn" type="button" value="回答表示" /></p>
+<div id="gamen"></div>
+     <hr />
+    <div style="text-align: right; font-style: italic;">
+      Copyright (c) <a href="https://www.kandj.org">K&J Software Design</a>, Corp. All rights reserved.
+    </div>
+ </body>
+<script>// <![CDATA[
+xmax=0;
+ymax=0;
+mztxt='';
+dd=0;
+mps=[];
+mz=(ax,ay)=>ax<0 || ax>=xmax || ay<0 || ay>=ymax?0:parseInt(mztxt.substr(ax+ay*xmax,1));
+mzw=(ax,ay)=>{mztxt=mztxt.substr(0,ax+ay*xmax)+'0'+mztxt.substr(ax+ay*xmax+1);}
+makemaze();
+rgx.addEventListener('input',makemaze,false);
+rgy.addEventListener('input',makemaze,false);
+
+function makemaze(){
+xmax=parseInt(rgx.value)*2+1;
+ymax=parseInt(rgy.value)*2+1;
+mztxt='';
+for(i=0;i<xmax*ymax;i++){
+mztxt+='1';
+}
+mps.splice(0);
+mps.push([1,1]);
+mzw(1,1);
+dd=1;
+do{
+mpi=Math.floor(Math.random()*mps.length);
+if(mz(mps[mpi][0]-2,mps[mpi][1])+mz(mps[mpi][0]+2,mps[mpi][1])+mz(mps[mpi][0],mps[mpi][1]-2)+mz(mps[mpi][0],mps[mpi][1]+2)==0){mps.splice(mpi,1);}else{
+dig(mps[mpi][0],mps[mpi][1]);
+}}while(dd<Math.floor(xmax/2)*Math.floor(ymax/2));
+txt='幅 '+rgx.value+' ／高さ '+rgy.value+'<br/>';
+txt+='<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" viewbox="0 0 '+(Math.floor(xmax/2)+0.2)+' '+(Math.floor(ymax/2)+0.2)+'">';
+txt+='<defs>';
+txt+='<path id="svgs" d="M 0.9,0.2 L 0.3,0.4 0.8,0.7 0.2,0.9" stroke-width="0.14" stroke="#ff4444" fill="none"></path>';
+txt+='<path id="svgg" d="M 0.9,0.4 L 0.6,0.3 0.3,0.4 0.3,0.7 0.6,0.8 0.85,0.7 0.85 0.85" stroke-width="0.14" stroke="#ff4444" fill="none"></path>';
+txt+='</defs>';
+for(j=0;j<ymax;j++){for(i=0;i<xmax;i++){
+if(mz(i,j)==1){txt+='<rect x="'+Math.floor(i/2)+'" y="'+Math.floor(j/2)+'" width="'+(i%2==0?0.1:1)+'" height="'+(j%2==0?0.1:1)+'" fill="#444444" stroke-width="0" stroke="#444444"></rect>';}
+if(i%2+j%2==2){txt+='<rect x="'+(Math.floor(i/2)+0.1)+'" y="'+(Math.floor(j/2)+0.1)+'" width="1" height="1" fill="#ffffff" stroke-width="0" stroke="#444444" id="z'+i+'_'+j+'"></rect>';}
+if(i==1 && j==1){txt+='<use xlink:href="#svgs" x="'+Math.floor(i/2)+'" y="'+Math.floor(j/2)+'"/>'};
+if(i==xmax-2 && j==ymax-2){txt+='<use xlink:href="#svgg" x="'+Math.floor(i/2)+'" y="'+Math.floor(j/2)+'"/>'};
+}}
+txt+='</svg>';
+gamen.innerHTML=txt;
+szfinit();
+}
+
+function dig(xd,yd){
+vt=Math.floor(Math.random()*4);
+vy=Math.floor(vt/2-0.5);
+vx=(vt*2-3)-vy*3;
+if(mz(xd+vx*2,yd+vy*2)==1){
+mzw(xd+vx*2,yd+vy*2);
+mzw(xd+vx,yd+vy);
+xd+=vx*2;yd+=vy*2;
+mps.push([xd,yd]);
+dig(xd,yd);
+dd++;
+}
+}
+
+btn.addEventListener('click',szf,false);
+szm=[];
+szn=[];
+szr=[];
+szp=0;
+szfinit();
+
+function szfinit(){
+szm=[1+xmax];
+szn=[0];
+szr=[-1];
+szp=0;
+}
+
+function szf(e){
+for(i=0;i<4;i++){
+szx=Math.floor(i/2)*(i%2*2-1);
+szy=(1-Math.floor(i/2))*(i%2*2-1);
+szs=szm[szp]%xmax+szx*2+(Math.floor(szm[szp]/xmax)+szy*2)*xmax;
+if(szm[szp]%xmax+szx*2>0 && szm[szp]%xmax+szx*2<xmax && Math.floor(szm[szp]/xmax)+szy*2>0 && Math.floor(szm[szp]/xmax)+szy*2<ymax && mz(szm[szp]%xmax+szx,Math.floor(szm[szp]/xmax)+szy)==0 && szm.indexOf(szs)<0){
+szm.push(szs);
+szn.push(szn[szp]+1);
+szr.push(szp);
+}
+}
+szp++;
+szl=szm.indexOf(xmax-2+(ymax-2)*xmax);
+if(szl<0){szf();}else{
+while(szl>=0){document.getElementById('z'+(szm[szl]%xmax)+'_'+Math.floor(szm[szl]/xmax)).setAttribute('fill','#aaccdd');szl=szr[szl];}
+}
+}
+// ]]></script>
+
+</html>

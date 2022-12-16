@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="description" content="療法士のための教材集">
+    <meta name="keywords" content="リハビリ,言語聴覚士,作業療法士,言語療法">
+    <title>無作為文字列 - 療法教材</title>
+    <style>
+     body{
+       width: 1024px;
+       margin: auto;
+     }
+     #wrap{ 
+       width: 100%;
+       margin: 0 auto;
+       text-align:left;
+     }
+    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7958083579851040"
+            crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <p id="notes" style="font-size: 1.5em; text-align: center;">
+    </p>
+    <p>
+      個数：<select id="num" value="100" onchange="setText()">
+      <option value="100">100</option>
+      <option value="200">200</option>
+      <option value="300">300</option>
+      <option value="400">400</option>
+      <option value="500">500</option>
+      <option value="600">600</option>
+      <option value="700">700</option>
+      <option value="800">800</option>
+      <option value="900">900</option>
+      <option value="1000">1000</option>
+      </select>
+    </p>
+    <p id="wrap" style="font-size: 1.5em;"></p>
+    <hr />
+    <div style="text-align: right; font-style: italic;">
+      Copyright (c) <a href="https://www.kandj.org">K&J Software Design</a>, Corp. All rights reserved.
+    </div>
+  </body>
+  <script>
+   const SC = 0x304a; // お
+   const EC = 0x305e; // ぞ
+   function setText(){
+     init();
+     
+     const numEl = document.getElementById('num');
+     
+     const text = getRandomText(SC, EC, numEl.value);
+
+     const wrap = document.getElementById('wrap');
+     
+     while(wrap.firstChild ) {
+       wrap.removeChild(wrap.firstChild);
+     }
+     const lines = [];
+     for (let i = 0; i < text.length; i += 40) {
+       lines.push(text.slice(i, i + 40));
+     }
+
+     lines.forEach(l => {
+       const line = document.createElement('div');
+       line.classList.add('lines');
+       for (let i = 0; i < l.length; i++) {
+         const c = document.createElement('span');
+         const ch = l.charAt(i);
+         c.innerHTML = ch;
+         c.classList.add(ch);
+         line.appendChild(c);
+       }
+       const attr = document.createElement('span');
+       attr.classList.add('lineAttr');
+       attr.style.fontSize = '1em';
+       attr.style.fontWeight = "bold";
+       line.appendChild(attr);
+
+       wrap.appendChild(line);
+     });
+   }
+   function getRandomText(lb, ub, n) {
+     var cs = Array(n), span = ub - lb + 1;
+     for (let i = 0; i < n; i++) {
+       cs[i] = lb + Math.floor(Math.random() * span);
+     }
+     return String.fromCharCode.apply(String, cs);
+   }
+
+   function showAnswer(ch) {
+     document.querySelectorAll(`.lines`).forEach(line => {
+       const chars = line.querySelectorAll(`.${ch}`);
+       chars.forEach(el => {
+         el.style.color = "red";
+         el.style.fontWeight = "bold";
+         el.style.border = "solid";
+       });
+       let attr = parseInt(line.querySelector(`.lineAttr`).innerHTML);
+       if (isNaN(attr)) {
+         attr = 0;
+       }
+       line.querySelector(`.lineAttr`).innerHTML = `${attr + chars.length}`;
+     });
+   }
+
+   function hideAnswer(ch) {
+     document.querySelectorAll(`.${ch}`).forEach(el => {
+       el.style.color = 'black';
+       el.style.fontWeight = "normal";
+       el.style.border = "none";
+     });
+     document.querySelectorAll('.lineAttr').forEach(el => {
+       el.innerHTML = '';
+     });
+   }
+
+   const checked_ = new Array(EC - SC);
+
+   function init() {
+     const p = document.getElementById('notes');
+
+     while(p.firstChild ) {
+       p.removeChild(p.firstChild);
+     }
+     for (let i = 0; i <= EC - SC; i++) {
+       checked_[i] = false;
+       const note = [SC + i];
+
+       const ch = String.fromCharCode.apply(String, note);
+       const c = document.createElement('span');
+       c.innerHTML = ch;
+       c.style.cursor = 'pointer';
+       c.addEventListener("click", function() {
+         checked_[i] = !checked_[i];
+         checked_[i] ? showAnswer(ch) : hideAnswer(ch);
+       });
+       p.appendChild(c);
+     }
+   }
+   (function() {
+     setText();
+   })();
+  </script>
+</html>

@@ -4,7 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="description" content="療法士のための教材集">
     <meta name="keywords" content="リハビリ,言語聴覚士,作業療法士,言語療法">
-    <title>計算問題生成器 - 療法教材</title>
+    <title>迷路生成器 - 療法教材</title>
     <style>
     body{
        width: 1024px;
@@ -22,7 +22,9 @@
   <body>
 <p>幅:<br /><input id="rgx" style="width: 100%;" max="60" min="5" type="range" value="15" /></p>
 <p>高さ:<br /><input id="rgy" style="width: 100%;" max="60" min="5" type="range" value="10" /></p>
-<p><input id="btn" type="button" value="回答表示" /></p>
+<p><input id="btn" type="checkbox" />
+  <label for="btn">回答を表示</label>
+</p>
 <div id="gamen"></div>
      <hr />
     <div style="text-align: right; font-style: italic;">
@@ -71,7 +73,8 @@ if(i==xmax-2 && j==ymax-2){txt+='<use xlink:href="#svgg" x="'+Math.floor(i/2)+'"
 }}
 txt+='</svg>';
 gamen.innerHTML=txt;
-szfinit();
+   szfinit();
+   if (document.getElementById('btn').checked) szf();
 }
 
 function dig(xd,yd){
@@ -88,7 +91,7 @@ dd++;
 }
 }
 
-btn.addEventListener('click',szf,false);
+btn.addEventListener('change',szf,false);
 szm=[];
 szn=[];
 szr=[];
@@ -116,7 +119,9 @@ szr.push(szp);
 szp++;
 szl=szm.indexOf(xmax-2+(ymax-2)*xmax);
 if(szl<0){szf();}else{
-while(szl>=0){document.getElementById('z'+(szm[szl]%xmax)+'_'+Math.floor(szm[szl]/xmax)).setAttribute('fill','#aaccdd');szl=szr[szl];}
+   while(szl>=0){
+     const color = document.getElementById('btn').checked ? '#aaccdd': '#ffffff';
+     document.getElementById('z'+(szm[szl]%xmax)+'_'+Math.floor(szm[szl]/xmax)).setAttribute('fill',color);szl=szr[szl];}
 }
 }
 // ]]></script>

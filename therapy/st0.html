@@ -97,23 +97,40 @@
          el.style.fontWeight = "bold";
          el.style.border = "solid";
        });
-       let attr = parseInt(line.querySelector(`.lineAttr`).innerHTML);
-       if (isNaN(attr)) {
-         attr = 0;
+       const attr = line.querySelector(`.lineAttr`);
+       const org = parseInt(attr.innerHTML);
+       const sum = isNaN(org) ? chars.length: chars.length + org;
+       if (sum > 0) {
+         line.querySelector(`.lineAttr`).innerHTML = sum;
        }
-       line.querySelector(`.lineAttr`).innerHTML = `${attr + chars.length}`;
      });
+     const n = document.querySelectorAll(`.${ch}`).length;
+     const attr = document.querySelector(`.noteAttr`);
+     const org = parseInt(attr.innerHTML);
+     const sum = isNaN(org) ? n: org + n;
+     if (sum > 0) {
+       attr.innerHTML = sum;
+     }
    }
 
    function hideAnswer(ch) {
-     document.querySelectorAll(`.${ch}`).forEach(el => {
+     const chars = document.querySelectorAll(`.${ch}`);
+     chars.forEach(el => {
        el.style.color = 'black';
        el.style.fontWeight = "normal";
        el.style.border = "none";
      });
-     document.querySelectorAll('.lineAttr').forEach(el => {
-       el.innerHTML = '';
+     document.querySelectorAll(`.lines`).forEach(line => {
+       const lchars = line.querySelectorAll(`.${ch}`);
+       const attr = line.querySelector(`.lineAttr`);
+       const org = parseInt(attr.innerHTML);
+       const sum = isNaN(org) ? 0: org - lchars.length;
+       attr.innerHTML = (sum > 0) ? sum: '';
      });
+     const attr = document.querySelector(`.noteAttr`);
+     const org = parseInt(attr.innerHTML);
+     const sum = isNaN(org) ? 0: org - chars.length;
+     attr.innerHTML = (sum > 0) ? sum: '';
    }
 
    const checked_ = new Array(EC - SC);
@@ -138,6 +155,12 @@
        });
        p.appendChild(c);
      }
+     const attr = document.createElement('span');
+     attr.classList.add(`noteAttr`);
+     attr.style.fontSize = '1em';
+     attr.style.fontWeight = "bold";
+     p.appendChild(attr);
+
    }
    (function() {
      setText();

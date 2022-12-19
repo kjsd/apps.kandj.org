@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="description" content="療法士のための教材集">
+    <meta name="keywords" content="リハビリ,言語聴覚士,作業療法士,言語療法">
+    <title>穴埋め四字熟語 - 療法教材</title>
+    <style>
+     body{
+       max-width: 1024px;
+       margin: auto;
+     }
+     #wrap{ 
+       width: 100%;
+       margin: 0 auto;
+       text-align:left;
+     }
+    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7958083579851040"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-loading-overlay@1.2.0/dist/js-loading-overlay.min.js"></script>
+  </head>
+  <body>
+    <div id="wrap">
+      <p>
+        問題数：<select id="num" onchange="make_q()">
+        <option value="10" selected>10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+        <option value="40">40</option>
+        <option value="50">50</option>
+        </select>
+        難易度：<select id="level" onchange="make_q()">
+        <option value="full" selected>無差別</option>
+        <option value="easy">易しめ</option>
+        </select>
+      </p>
+        <input type="checkbox" id="hide_kana" onchange="toggle_kana()" />
+        <label for="hide_kana">ふりがなを隠す</label>
+        <input type="checkbox" id="hide_desc" onchange="toggle_desc()" />
+        <label for="hide_desc">説明文を隠す</label>
+        <input type="checkbox" id="hide_answer" onchange="toggle_answer()" />
+        <label for="hide_answer">回答表示を隠す</label>
+      </p>
+      <div id="idioms"></div>
+    </div>
+  </body>
+  <script>
+   function toggle_kana() {
+     const hidden = document.getElementById('hide_kana').checked;
+     document.querySelectorAll('.kana').forEach(el => {
+       el.style.display = hidden ? 'none': 'inline';
+     });
+   }
+   function toggle_desc() {
+     const hidden = document.getElementById('hide_desc').checked;
+     document.querySelectorAll('.desc').forEach(el => {
+       el.style.display = hidden ? 'none': 'block';
+     });
+   }
+   function toggle_answer() {
+     const hidden = document.getElementById('hide_answer').checked;
+     document.querySelectorAll('.answer').forEach(el => {
+       el.style.visibility = hidden ? 'hidden': 'visible';
+     });
+   }
+   function random_sort(org) {
+     const ary = org.concat();
+     let a = ary.length;
+     while (a) {
+       const j = Math.floor( Math.random() * a);
+       const t = ary[--a];
+       ary[a] = ary[j];
+       ary[j] = t;
+     }
+     return ary;
+   }
+   
+   function random(min, max) {
+     return Math.floor(Math.random() * (max - min)) + min;
+   }
+
+   async function to_kana(ch) {
+     const header = {
+       'Accept': 'application/json',
+       'Content-Type': 'application/json'
+     };
+     const body = JSON.stringify({
+       app_id: 'fe7035ca03f445db8b70c59ca2a9f860b2d6e32ca5c06852c1c2c8136e0e7b9c',
+       sentence: ch,
+       output_type: "hiragana"
+     });
+     const res = await fetch('https://labs.goo.ne.jp/api/hiragana', {
+       method: 'POST',
+       headers:  header,
+       body:  body
+     });
+     const data =  await res.json();
+     
+     return data.converted;
+   }
+
+   function make_q() {
+     JsLoadingOverlay.show();
+     const num = document.getElementById('num').value;
+     const easy = document.getElementById('level').value == 'easy';
+
+     const top = document.getElementById('idioms');
+     while(top.firstChild ) {
+       top.removeChild(top.firstChild);
+     }
+
+     let uri = `https://idiom-iq7iem6p7q-an.a.run.app?n=${num}`;
+     if(easy) {
+       uri += '&easy=1';
+     }
+     
+     fetch(uri)
+       .then(res => res.json())
+       .then(data => {
+         random_sort(data).forEach(v => {
+           const p = document.createElement('div');
+           const h = document.createElement('h3');
+           const e = random(0, v.kanji.length);
+           const c = v.kanji.charAt(e);
+           for (let i = 0; i < v.kanji.length; i++) {
+             h.innerHTML += (i == e) ? '□': v.kanji.charAt(i);
+           }
+           p.appendChild(h);
+           const kana = document.createElement('span');
+           kana.innerHTML = '(' + v.kana + ')';
+           kana.classList.add('kana');
+           p.appendChild(kana);
+           const el = document.createElement('div');
+           el.innerHTML = v.desc;
+           el.classList.add('desc');
+           p.appendChild(el);
+           make_answer(p, v, c);
+           top.appendChild(p);
+         });
+         toggle_kana();
+         toggle_desc();
+       }).catch(e => {
+         console.error(e);
+       }).finally(() => {
+         JsLoadingOverlay.hide();
+       });
+   }
+
+   async function make_answer(parent, data, ans_c) {
+     const ans_kana = await to_kana(ans_c);
+     const dmy = (await trkanji(ans_kana, 10)).filter(v => v != ans_c);
+     const ul = document.createElement('ol');
+     const lis = []
+     lis.push(document.createElement('li'));
+     lis.push(document.createElement('li'));
+     lis.push(document.createElement('li'));
+     lis[0].innerHTML = ans_c + '<span class="answer">○</span>';
+     lis[1].innerHTML = dmy[0];
+     lis[2].innerHTML = dmy[1];
+
+     random_sort(lis).forEach(li => {
+       ul.appendChild(li);
+     });
+     parent.appendChild(ul);
+   }
+   async function trkanji(kana, num) {
+     const uri = `https://trkanji-iq7iem6p7q-an.a.run.app?kana=${kana}&n=${num}`;
+     const res = await fetch(encodeURI(uri));
+     const data =  await res.json();
+     return data;
+   }
+   (function() {
+     make_q();
+   })();
+  </script>
+</html>

@@ -51,7 +51,7 @@
         <input type="checkbox" id="show_answer" onchange="toggle_answer()" />
         <label for="show_answer">回答表示</label>
       </p>
-      <div id="idioms" style="font-size: 2em;"></div>
+      <div id="idioms"></div>
     </div>
      <hr />
     <div style="text-align: right; font-style: italic;">
@@ -133,7 +133,7 @@
        .then(data => {
          random_sort(data).forEach((v, idx) => {
            const p = document.createElement('div');
-           const h = document.createElement('h3');
+           const h = document.createElement('h1');
            const e = random(0, v.kanji.length);
            const c = v.kanji.charAt(e);
            for (let i = 0; i < v.kanji.length; i++) {
@@ -142,9 +142,11 @@
            p.appendChild(h);
            const kana = document.createElement('span');
            kana.innerHTML = '(' + v.kana + ')';
+           kana.style.fontSize = '1.5em';
            kana.classList.add('kana');
            p.appendChild(kana);
            const el = document.createElement('div');
+           el.style.fontSize = '1.5em';
            el.innerHTML = v.desc;
            el.classList.add('desc');
            p.appendChild(el);
@@ -185,6 +187,9 @@
      lis.push(document.createElement('li'));
      lis.push(document.createElement('li'));
      lis.push(document.createElement('li'));
+     lis[0].style.fontSize = '1.5em';
+     lis[1].style.fontSize = '1.5em';
+     lis[2].style.fontSize = '1.5em';
      lis[0].innerHTML = ans_c;
      lis[1].innerHTML = dmy[0];
      lis[2].innerHTML = dmy[1];

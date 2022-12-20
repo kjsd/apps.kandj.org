@@ -26,6 +26,16 @@
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7958083579851040"
             crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-loading-overlay@1.2.0/dist/js-loading-overlay.min.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-16VNV9KYG1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-16VNV9KYG1');
+</script>
   </head>
   <body>
 <p style="display:flex;">
@@ -410,7 +420,7 @@
       Copyright (c) <a href="https://www.kandj.org">K&J Software Design</a>, Corp. All rights reserved.
     </div>
   </body>
-<script>
+  <script>
 
  function toggle_answer(cb) {
    const el = document.getElementById('answer');
@@ -676,7 +686,9 @@ var put_x=0;
 var put_y=0;
 
 function nanpure_start() {
-	var i,j;
+     JsLoadingOverlay.show();
+
+	 var i,j;
 	//if(running) {
 	//	if(!confirm("リセットしますか？"))return;
 	//}
@@ -695,6 +707,7 @@ function nanpure_start() {
 	starttime=(new Date()).getTime();
 	//timer_id=setInterval("nanpure_disptime();",100);
 	//running=1;
+     JsLoadingOverlay.hide();
 }
 
 function nanpure_disptime() {

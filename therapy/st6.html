@@ -19,6 +19,15 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7958083579851040"
             crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-loading-overlay@1.2.0/dist/js-loading-overlay.min.js"></script>
+<!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-16VNV9KYG1"></script>
+    <script>
+     window.dataLayer = window.dataLayer || [];
+     function gtag(){dataLayer.push(arguments);}
+     gtag('js', new Date());
+
+     gtag('config', 'G-16VNV9KYG1');
+    </script>
   </head>
   <body>
     <div id="wrap">
@@ -39,10 +48,14 @@
         <label for="hide_kana">ふりがなを隠す</label>
         <input type="checkbox" id="hide_desc" onchange="toggle_desc()" />
         <label for="hide_desc">説明文を隠す</label>
-        <input type="checkbox" id="hide_answer" onchange="toggle_answer()" />
-        <label for="hide_answer">回答表示を隠す</label>
+        <input type="checkbox" id="show_answer" onchange="toggle_answer()" />
+        <label for="show_answer">回答表示</label>
       </p>
-      <div id="idioms"></div>
+      <div id="idioms" style="font-size: 2em;"></div>
+    </div>
+     <hr />
+    <div style="text-align: right; font-style: italic;">
+      Copyright (c) <a href="https://www.kandj.org">K&J Software Design</a>, Corp. All rights reserved.
     </div>
   </body>
   <script>
@@ -59,9 +72,9 @@
      });
    }
    function toggle_answer() {
-     const hidden = document.getElementById('hide_answer').checked;
+     const show = document.getElementById('show_answer').checked;
      document.querySelectorAll('.answer').forEach(el => {
-       el.style.visibility = hidden ? 'hidden': 'visible';
+       el.style.visibility = show ? 'visible': 'hidden';
      });
    }
    function random_sort(org) {
@@ -118,7 +131,7 @@
      fetch(uri)
        .then(res => res.json())
        .then(data => {
-         random_sort(data).forEach(v => {
+         random_sort(data).forEach((v, idx) => {
            const p = document.createElement('div');
            const h = document.createElement('h3');
            const e = random(0, v.kanji.length);
@@ -135,7 +148,7 @@
            el.innerHTML = v.desc;
            el.classList.add('desc');
            p.appendChild(el);
-           make_answer(p, v, c);
+           make_answer(p, v, c, idx);
            top.appendChild(p);
          });
          toggle_kana();
@@ -147,17 +160,39 @@
        });
    }
 
-   async function make_answer(parent, data, ans_c) {
+   async function make_answer(parent, data, ans_c, idx) {
      const ans_kana = await to_kana(ans_c);
      const dmy = (await trkanji(ans_kana, 10)).filter(v => v != ans_c);
+
+     const ans = document.createElement('span');
+     ans.classList.add('answer');
+     ans.style.visibility = 'hidden';
+     ans.innerHTML = '⭕';
+
+     const cks = [];
+     cks.push(document.createElement('input'));
+     cks.push(document.createElement('input'));
+     cks.push(document.createElement('input'));
+     cks[0].setAttribute('type', 'radio');
+     cks[0].setAttribute('name', `check-${idx}`);
+     cks[1].setAttribute('type', 'radio');
+     cks[1].setAttribute('name', `check-${idx}`);
+     cks[2].setAttribute('type', 'radio');
+     cks[2].setAttribute('name', `check-${idx}`);
+
      const ul = document.createElement('ol');
      const lis = []
      lis.push(document.createElement('li'));
      lis.push(document.createElement('li'));
      lis.push(document.createElement('li'));
-     lis[0].innerHTML = ans_c + '<span class="answer">○</span>';
+     lis[0].innerHTML = ans_c;
      lis[1].innerHTML = dmy[0];
      lis[2].innerHTML = dmy[1];
+     lis[0].appendChild(cks[0]);
+     lis[1].appendChild(cks[1]);
+     lis[2].appendChild(cks[2]);
+
+     lis[0].appendChild(ans);
 
      random_sort(lis).forEach(li => {
        ul.appendChild(li);

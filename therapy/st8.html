@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="description" content="療法士のための教材集">
+    <meta name="keywords" content="リハビリ,言語聴覚士,作業療法士,言語療法">
+    <title>無作為色座標 - 療法教材</title>
+    <style>
+     body{
+       max-width: 1024px;
+       margin: auto;
+     }
+     #wrap{ 
+       width: 100%;
+       margin: 0 auto;
+       text-align:left;
+     }
+     .list{
+       font-size: 3em;
+       column-count: 2;
+       margin: 10px;
+     }
+     td, th {
+       border: solid;
+       font-size: 2em;
+       width: 100px;
+       height: 100px;
+       text-align: center;
+     }
+     table {
+       border-collapse: collapse;
+       table-layout: fixed;
+     }
+    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7958083579851040"
+            crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-16VNV9KYG1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-16VNV9KYG1');
+</script>
+  </head>
+  <body>
+    <div id="wrap">
+      <p>
+        問題数：
+        <select id="num" value="10" onchange="make_pos()">
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option> 
+          <option value="40">40</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+        <input type="checkbox" id="show_answer" onchange="toggle_answer()"/>
+        <label for="show_answer">回答表示</label>    
+      </p>
+      <ol id="q" class="list">
+      </ol>
+      <table id="answer" style="display: none;">
+        <tr>
+          <th></th>
+          <th>１</th>
+          <th>２</th>
+          <th>３</th>
+          <th>４</th>
+          <th>５</th>
+          <th>６</th>
+          <th>７</th>
+          <th>８</th>
+          <th>９</th>
+          <th>１０</th>
+        </tr>
+        <tr>
+          <th>一</th>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>二</th>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>三</th>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>四</th>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>五</th>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>六</th>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>七</th>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>八</th>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>九</th>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>十</th>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>  
+    </div>
+    <hr />
+    <div style="text-align: right; font-style: italic;">
+      Copyright (c) <a href="https://www.kandj.org">K&J Software Design</a>, Corp.All rights reserved.
+    </div>
+  </body>
+  <script>
+   const positions = [];
+   const colors = [{
+     label: '緑',
+     code: 'green'
+   }, {
+     label: '青',
+     code: 'blue'
+   },{
+     label: '黄',
+     code: 'yellow'
+   },{
+     label: '赤',
+     code: 'red'
+   },{
+     label: '紫',
+     code: 'purple'
+   },{
+     label: '橙',
+     code: 'orange'
+   }];
+   const kansuzi = ['一','二','三','四','五','六','七','八','九','十'];
+   function toggle_answer() {
+     const el = document.getElementById("show_answer");
+     const v = el.checked ? "block": "none"; 
+     document.getElementById('answer').style.display = v 
+   }
+   function make_pos() {
+     const num = document.getElementById("num").value;
+
+     const q = document.getElementById("q");
+     while(q.firstChild ) {
+       q.removeChild(q.firstChild);
+     }
+
+     const questions = [];
+     const randomized = random_sort(positions);
+     for (let n = 0; n < num; n++) {
+       const p = document.createElement("li");
+       p.innerHTML = `(${randomized[n][0]}, ${randomized[n][1]}) `;
+       const el = document.createElement("span");
+       const color = colors[random(0, colors.length)];
+       el.innerHTML = color.label;
+       el.style.color = color.code;
+       p.appendChild(el)
+
+       questions.push({pos: randomized[n], color: color.code});
+       q.appendChild(p);
+       make_answer(questions);
+     }
+   }
+   function make_answer(questions) {
+     document.querySelectorAll('td').forEach(el => el.innerHTML = '');
+     
+     questions.forEach((q, n) => {
+       const x = q.pos[0] - 1;
+       const y = kansuzi.findIndex(v => v == q.pos[1]) + 1;
+       document.querySelectorAll('tr').forEach((tr, i) => {
+         if (i == y) {
+           tr.querySelectorAll('td').forEach((td, j) => {
+             if (j == x) {
+               td.innerHTML = n + 1;
+               td.style.color = q.color;
+               td.style.borderColor = 'black';
+             }
+           });
+         }
+       });
+     });
+   }
+
+   function random(min, max) {
+     return Math.floor(Math.random() * (max - min)) + min;
+   }
+
+   function random_sort(org) {
+     const ary = org.concat();
+     let a = ary.length;
+     while (a) {
+       const j = Math.floor( Math.random() * a);
+       const t = ary[--a];
+       ary[a] = ary[j];
+       ary[j] = t;
+     }
+     return ary;
+   }
+
+   (function() {
+     for (let i = 0; i < 10; i++) {
+       for (let j = 0; j < 10; j++) {
+         const y = kansuzi[j];
+         positions.push([i + 1, y]);
+       }
+     }
+     console.log(positions);
+     make_pos();
+   })();
+  </script>
+</html>

@@ -116,6 +116,9 @@ function toggle_answer() {
    if (use_square) {
       ops.push("*");
    }
+   if (ops.length == 0 || use_plus) {
+       ops.push("+");
+   }
 
    const p0 = document.getElementById("formula-0");
    const p1 = document.getElementById("formula-1");

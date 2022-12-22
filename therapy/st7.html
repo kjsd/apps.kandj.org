@@ -4,7 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="description" content="療法士のための教材集">
     <meta name="keywords" content="リハビリ,言語聴覚士,作業療法士,言語療法">
-    <title>無作為数字表 - 療法教材</title>
+    <title>ストループテスト - 療法教材</title>
     <style>
      body{
        width: 1024px;
@@ -16,8 +16,8 @@
        text-align:left;
      }
      td, th {
-       border: solid;
-       font-size: 2em;
+       border: none;
+       font-size: 3em;
        width: 100px;
        height: 100px;
        text-align: center;
@@ -39,11 +39,8 @@
      gtag('config', 'G-16VNV9KYG1');
     </script>
   </head>
-<body>
-  <button onClick="fill();">再配置</button>
-  <input type="checkbox" id="no_color" onchange="toggle_color()">
-  <label for="no_color">色分けなし</label>
-    
+  <body>
+    <button onClick="fill();">再配置</button>
 <table>
   <tr>
     <td></td>
@@ -172,37 +169,35 @@
     </div>
 </body>
 <script>
- function toggle_color() {
-   const no_color = document.getElementById('no_color').checked;
-
-    document.querySelectorAll('td').forEach((el,i) => {
-      el.innerHTML = numbers[i];
-      if (no_color) {
-        el.style.backgroundColor = 'initial';
-      } else {
-        el.style.backgroundColor = (numbers[i] % 2) == 0 ? 'lightskyblue' : 'lightpink';
-      }
-   });
-}
- const numbers = [];
- function fill() {
-   let a = numbers.length;
+ function random_sort(org) {
+   const ary = org.concat();
+   let a = ary.length;
    while (a) {
      const j = Math.floor( Math.random() * a);
-     const t = numbers[--a];
-     numbers[a] = numbers[j];
-     numbers[j] = t;
+     const t = ary[--a];
+     ary[a] = ary[j];
+     ary[j] = t;
    }
+   return ary;
+ }
+
+ function random(min, max) {
+   return Math.floor(Math.random() * (max - min)) + min;
+ }
+
+ const labels = ['緑','青','黄','赤'];
+ const colors = ['green','blue','yellow','red'];
  
-   document.querySelectorAll('td').forEach((el,i) => {
-     el.innerHTML = numbers[i];
+ function fill() {
+    document.querySelectorAll('td').forEach(el => {
+     const l = labels[random(0, labels.length)];
+     const c = colors[random(0, colors.length)];
+
+     el.innerHTML = l;
+     el.style.color = c;
    });
-   toggle_color();
  }
  (function() {
-   for (let i = 1; i  <= 100; i++) {
-     numbers.push(i);
-   }
    fill();
   })();
 </script>

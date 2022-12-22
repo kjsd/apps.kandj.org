@@ -175,27 +175,34 @@
      cks.push(document.createElement('input'));
      cks.push(document.createElement('input'));
      cks.push(document.createElement('input'));
+     cks.push(document.createElement('input'));
      cks[0].setAttribute('type', 'radio');
      cks[0].setAttribute('name', `check-${idx}`);
      cks[1].setAttribute('type', 'radio');
      cks[1].setAttribute('name', `check-${idx}`);
      cks[2].setAttribute('type', 'radio');
      cks[2].setAttribute('name', `check-${idx}`);
+     cks[3].setAttribute('type', 'radio');
+     cks[3].setAttribute('name', `check-${idx}`);
 
      const ul = document.createElement('ol');
      const lis = []
      lis.push(document.createElement('li'));
      lis.push(document.createElement('li'));
      lis.push(document.createElement('li'));
+     lis.push(document.createElement('li'));
      lis[0].style.fontSize = '1.5em';
      lis[1].style.fontSize = '1.5em';
      lis[2].style.fontSize = '1.5em';
+     lis[3].style.fontSize = '1.5em';
      lis[0].innerHTML = ans_c;
      lis[1].innerHTML = dmy[0];
      lis[2].innerHTML = dmy[1];
+     lis[3].innerHTML = dmy[2];
      lis[0].appendChild(cks[0]);
      lis[1].appendChild(cks[1]);
      lis[2].appendChild(cks[2]);
+     lis[3].appendChild(cks[3]);
 
      lis[0].appendChild(ans);
 

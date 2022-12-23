@@ -56,6 +56,20 @@
           <option value="50">50</option>
           <option value="100">100</option>
         </select>
+        <input type="checkbox" id="use_red" checked  onchange="make_pos()" />
+        <label for="use_red" style="color: red;">赤</label>
+        <input type="checkbox" id="use_green" checked onchange="make_pos()" />
+        <label for="use_green" style="color: green;">緑</label>
+        <input type="checkbox" id="use_blue" checked onchange="make_pos()" />
+        <label for="use_blue" style="color: blue;">青</label>
+        <input type="checkbox" id="use_yellow" checked onchange="make_pos()" />
+        <label for="use_yellow" style="color: yellow;">黄</label>
+        <input type="checkbox" id="use_purple" checked onchange="make_pos()" />
+        <label for="use_purple" style="color: purple;">紫</label>
+        <input type="checkbox" id="use_orange" checked onchange="make_pos()" />
+        <label for="use_orange" style="color: orange;">橙</label>
+      </p>
+      <p>
         <input type="checkbox" id="show_answer" onchange="toggle_answer()"/>
         <label for="show_answer">回答表示</label>    
       </p>
@@ -214,25 +228,6 @@
   </body>
   <script>
    const positions = [];
-   const colors = [{
-     label: '緑',
-     code: 'green'
-   }, {
-     label: '青',
-     code: 'blue'
-   },{
-     label: '黄',
-     code: 'yellow'
-   },{
-     label: '赤',
-     code: 'red'
-   },{
-     label: '紫',
-     code: 'purple'
-   },{
-     label: '橙',
-     code: 'orange'
-   }];
    const kansuzi = ['一','二','三','四','五','六','七','八','九','十'];
    function toggle_answer() {
      const el = document.getElementById("show_answer");
@@ -241,12 +236,57 @@
    }
    function make_pos() {
      const num = document.getElementById("num").value;
+     const use_red = document.getElementById("use_red").checked;
+     const use_green = document.getElementById("use_green").checked;
+     const use_blue = document.getElementById("use_blue").checked;
+     const use_yellow = document.getElementById("use_yellow").checked;
+     const use_purple = document.getElementById("use_purple").checked;
+     const use_orange = document.getElementById("use_orange").checked;
 
      const q = document.getElementById("q");
      while(q.firstChild ) {
        q.removeChild(q.firstChild);
      }
 
+     const colors = [];
+
+     if (use_green) {
+       colors.push({
+         label: '緑',
+         code: 'green'
+       });
+     }
+     if (use_blue) {
+       colors.push({
+         label: '青',
+         code: 'blue'
+       });
+     }
+     if (use_yellow) {
+      colors.push({
+        label: '黄',
+        code: 'yellow'
+      });
+     }
+     if (use_purple) {
+       colors.push({
+         label: '紫',
+         code: 'purple'
+       });
+     }
+     if (use_orange) {
+       colors.push({
+         label: '橙',
+         code: 'orange'
+       });
+     }
+     if (colors.length == 0 || use_red) {
+       colors.push({
+         label: '赤',
+         code: 'red'
+       });
+     }
+     
      const questions = [];
      const randomized = random_sort(positions);
      for (let n = 0; n < num; n++) {

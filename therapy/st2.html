@@ -46,22 +46,35 @@
           <option value="100">100</option>
         </select>
         <br />
-        桁数：
-        <select id="digits" value="1" onchange="make_formula()">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option> 
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-        <br />
         項数：
-        <select id="args" value="2" onchange="make_formula()">
+        <select id="args" value="2" onchange="change_args()">
           <option value="2">2</option>
           <option value="3">3</option> 
           <option value="4">4</option>
           <option value="5">5</option>
         </select>
+        <div id="digits">
+          <div>
+            桁数1：
+            <select id="digits_0" value="1" onchange="make_formula()">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option> 
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+          <div>
+            桁数2：
+            <select id="digits_1" value="1" onchange="make_formula()">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option> 
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+        </div>
       </p>
       <p>
         演算子：
@@ -95,10 +108,39 @@ function toggle_answer() {
   document.querySelectorAll(".a").forEach(el => {
        el.style.visibility = v;
   });
+ }
+ function change_args() {
+   const argsnum = document.getElementById("args").value;
+   const digits = document.getElementById("digits");
+
+   while(digits.firstChild ) {
+     digits.removeChild(digits.firstChild);
+   }
+   
+   for (let i = 0; i < argsnum; i++) {
+     const p = document.createElement('div');
+     p.innerHTML = `桁数${i + 1}: `;
+     
+     const select = document.createElement('select');
+     select.id = `digits_${i}`;
+     select.value = 1;
+     select.addEventListener('change', make_formula);
+     for (let j = 0; j < 5; j++) {
+       const option = document.createElement('option');
+       option.value = j + 1;
+       option.innerHTML = j + 1;
+       select.appendChild(option);
+     }
+     p.appendChild(select);
+     digits.appendChild(p);
+
+   }
+
+   make_formula(); 
 }
+          
  function make_formula() {
-  const num = document.getElementById("num").value;
-   const digits = document.getElementById("digits").value;
+   const num = document.getElementById("num").value;
    const argsnum = document.getElementById("args").value;
    const use_plus = document.getElementById("use_plus").checked;
    const use_minus = document.getElementById("use_minus").checked;
@@ -132,6 +174,8 @@ function toggle_answer() {
    for (let n = 0; n < num; n++) {
      const args = [];
      for (let i = 0; i < argsnum; i++) {
+       const digits = document.getElementById(`digits_${i}`).value;
+
        const min = digits == 1 ? 0: Math.pow(10, digits - 1);
        const max = Math.pow(10, digits);
        const v = Math.floor(Math.random() * (max - min)) + min;
@@ -172,6 +216,7 @@ function toggle_answer() {
        p1.appendChild(fel);
      }
    }
+   toggle_answer();
  }
 
 function random_sort(ary) {

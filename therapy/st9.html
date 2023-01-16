@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="description" content="療法士のための教材集">
+    <meta name="keywords" content="リハビリ,言語聴覚士,作業療法士,言語療法">
+    <title>計算問題表 - 療法教材</title>
+    <style>
+     body{
+       max-width: 1024px;
+       margin: auto;
+     }
+     #wrap{ 
+       width: 100%;
+       margin: 0 auto;
+       text-align:left;
+     }
+     td, th {
+       border: solid;
+       font-size: 2em;
+       width: 100px;
+       height: 100px;
+       text-align: center;
+     }
+     table {
+       border-collapse: collapse;
+       table-layout: fixed;
+     }
+    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7958083579851040"
+            crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-16VNV9KYG1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-16VNV9KYG1');
+</script>
+  </head>
+  <body>
+    <div id="wrap">
+      <p>
+        問題行数：
+        <select id="num" value="1" onchange="make_header()">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option> 
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+        <input type="checkbox" id="show_answer" onchange="toggle_answer()"/>
+        <label for="show_answer">回答表示</label>    
+      </p>
+      <table id="formula">
+        <tr>
+          <td>
+            <select id="op" style="font-size: 1.5em;" onchange="make_header()">
+              <option value="+" selected>＋</option>
+              <option value="-">－</option>
+              <option value="*">×</option> 
+            </select>
+          </td>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </table>  
+    </div>
+    <hr />
+    <div style="text-align: right; font-style: italic;">
+      Copyright (c) <a href="https://www.kandj.org">K&J Software Design</a>, Corp.All rights reserved.
+    </div>
+  </body>
+  <script>
+   let xxx = [];
+   let yyy = [];
+   function toggle_answer() {
+     const el = document.getElementById("show_answer");
+     const v = el.checked ? "visible": "hidden";
+     
+     document.querySelectorAll('.answer').forEach(el => {
+       el.style.visibility = v;
+     });
+   }
+   function make_header() {
+     const num = document.getElementById("num").value;
+     const op = document.getElementById("op").value;
+     const p = document.getElementById("formula");
+
+     p.querySelectorAll('tr').forEach((el,i) => {
+       if (i > 0) {
+         el.remove();
+       }
+     });
+
+
+     const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+     const numbers1 = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+     if (op == '-') {
+       xxx = random_sort(numbers1);
+     } else {
+       xxx = random_sort(numbers);
+       
+     }
+     p.querySelectorAll('th').forEach((el,i) => {
+       el.innerHTML = xxx[i]; 
+     });
+
+     yyy = random_sort(numbers);
+     for (let i = 0; i < num; i++) {
+       const tr = document.createElement('tr');
+       const th = document.createElement('th');
+       th.innerHTML = yyy[i];
+       tr.appendChild(th);
+       for (let j = 0; j < 10; j++) {
+         const td = document.createElement('td');
+         td.classList.add('a');
+         tr.appendChild(td);
+       }
+       p.appendChild(tr);
+     }
+     make_answer();
+   }
+   function make_answer() {
+     const op = document.getElementById("op").value;
+
+     const p = document.getElementById("formula");
+
+     p.querySelectorAll('.answer').forEach(el => el.remove());
+       
+
+     p.querySelectorAll('.a').forEach((el,idx) => {
+       const span = document.createElement('span');
+       span.classList.add('answer');
+       span.style.visibility = 'hidden';
+       const x = idx % 10;
+       const y = Math.floor(idx / 10);
+       const f = `${xxx[x]} ${op} ${yyy[y]}`;
+       span.innerHTML = eval(f);
+       el.appendChild(span);
+     });
+     toggle_answer();
+   }
+
+   function random(min, max) {
+     return Math.floor(Math.random() * (max - min)) + min;
+   }
+
+   function random_sort(org) {
+     const ary = org.concat();
+     let a = ary.length;
+     while (a) {
+       const j = Math.floor( Math.random() * a);
+       const t = ary[--a];
+       ary[a] = ary[j];
+       ary[j] = t;
+     }
+     return ary;
+   }
+
+   (function() {
+     make_header();
+   })();
+  </script>
+</html>
